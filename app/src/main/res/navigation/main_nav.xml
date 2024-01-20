@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/location">
+    <fragment
+        android:id="@+id/time"
+        android:name="com.jdm.alarmlocation.presentation.ui.add.TimeSetFragment"/>
+    <fragment
+        android:id="@+id/location"
+        android:name="com.jdm.alarmlocation.presentation.ui.add.LocationSetFragment"/>
+</navigation>

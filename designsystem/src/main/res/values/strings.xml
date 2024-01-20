@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="str_cancel">취소</string>
+    <string name="str_confirm">확인</string>
+    <string name="str_time_picker_title">시간을 선택해주세요</string>
+    <string name="str_hour">시간</string>
+    <string name="str_minute">분</string>
+</resources>

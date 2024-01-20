@@ -15,4 +15,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "alarmlocation"
 include(":app")
- 
+include(":designsystem")
+include(":core")
+include(":model")
+include(":data")
