@@ -1,3 +1,36 @@
 <resources>
-    <string name="app_name">alarmlocation</string>
+    <string name="app_name">위치 알람</string>
+    <string name="str_app_name">위치 알람</string>
+    <string name="str_notification_update">업데이트 알림</string>
+    <string name="str_update_guide">더 좋아진 앱의 최신 버전을 준비했습니다. 새로운 버전으로 업데이트 후 이용해주세요.</string>
+    <string name="str_do_update">업데이트 하기</string>
+    <string name="str_do_next">다음에</string>
+    <string name="str_location">위치</string>
+    <string name="str_search_location">위치 탐색</string>
+    <string name="str_set_location_alarm">위치 알람 설정</string>
+    <string name="str_add_location_alarm">위치 알람 추가</string>
+    <string name="str_search_location_guide">현재 위치를 탐색하고 있습니다.</string>
+    <string name="str_wait_please">잠시만 기다려주세요.</string>
+    <string name="str_app_permission_mandatory_popup_title">필수 권한을 허용해야 서비스 정상 이용이 가능합니다. 필수 권한을 반드시 허용해 주세요.</string>
+    <string name="str_app_permission_storage_popup_desc">위치 알림을 위한 위치 정보 탐색을 위해 반드시 필요한 권한입니다.</string>
+    <string name="str_location_search_fail_desc">현재 위치를 찾을 수 없습니다.</string>
+    <string name="str_do_back">뒤로가기</string>
+    <string name="str_re_search">재탐색</string>
+    <string name="str_confirm">확인</string>
+    <string name="str_complete">완료</string>
+    <string name="str_alarm_name">알람 이름</string>
+    <string name="str_alarm_name_hint">알람 이름을 입력해주세요.</string>
+    <string name="str_location_set_hint">알람이 울릴 위치를 선택해주세요.</string>
+    <string name="str_select_current_location">현재 위치 탐색</string>
+    <string name="str_recently_search_address">최근 위치 탐색 목록</string>
+    <string name="str_empty_recently_search_address">최근 탐색한 위치가 없습니다.</string>
+    <string name="chr_between"> ~ </string>
+    <string name="str_time_between">시간 사이에</string>
+    <string name="str_alarm_location_guide">위치를 기준으로 반경 </string>
+    <string name="str_rl">를</string>
+    <string name="str_alarm_location_guide2">알려주는 위치 알람</string>
+    <string name="str_way">방법</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
