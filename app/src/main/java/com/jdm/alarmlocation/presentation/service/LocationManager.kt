@@ -1,4 +1,4 @@
-package com.jdm.alarmlocation.service
+package com.jdm.alarmlocation.presentation.service
 
 import android.content.Context
 import android.content.pm.PackageManager

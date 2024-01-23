@@ -1,4 +1,4 @@
-package com.jdm.alarmlocation.util
+package com.jdm.alarmlocation.presentation.ui.util
 
 import android.app.Activity
 import android.content.Context

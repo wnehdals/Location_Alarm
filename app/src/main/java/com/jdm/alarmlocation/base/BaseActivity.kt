@@ -5,10 +5,11 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.jdm.alarmlocation.util.slideLeft
-import com.jdm.alarmlocation.util.slideRight
+import com.jdm.alarmlocation.presentation.ui.util.slideLeft
+import com.jdm.alarmlocation.presentation.ui.util.slideRight
 
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     @get:LayoutRes
@@ -60,7 +61,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         return checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
     }
     protected fun isPermissionAllow(permission: Array<String>): Boolean {
-        return permission.none { checkSelfPermission(it) != PackageManager.PERMISSION_GRANTED }
+        return permission.filter { ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_DENIED }.isEmpty()
     }
     protected fun exitApp() {
         this.moveTaskToBack(true)

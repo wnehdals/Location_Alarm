@@ -5,4 +5,5 @@ plugins {
     id("com.google.dagger.hilt.android") version "2.44" apply false
     id("com.google.gms.google-services") version "4.3.15" apply false
     id("com.google.firebase.crashlytics") version "2.9.9" apply false
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10" apply false
 }
