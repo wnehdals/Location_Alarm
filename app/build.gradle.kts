@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -11,12 +13,12 @@ plugins {
 
 android {
     namespace = "com.jdm.alarmlocation"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.jdm.alarmlocation"
-        minSdk = 26
-        targetSdk = 33
+        minSdk = 30
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0.0"
 
@@ -25,16 +27,34 @@ android {
             useSupportLibrary = true
         }
     }
-
+    signingConfigs {
+        create("release") {
+            keyAlias = "locationalarm"
+            keyPassword = getPropertyKey("keyPassword")
+            storeFile = file("./Key.jks")
+            storePassword = getPropertyKey("storePassword")
+        }
+    }
     buildTypes {
-        release {
+        getByName("debug") {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            isDebuggable = true
+        }
+        getByName("release") {
+            isMinifyEnabled = true
+            signingConfig = signingConfigs.getByName("release")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            isDebuggable = false
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -73,21 +93,6 @@ dependencies {
     implementation ("com.google.dagger:hilt-android:$hilt_version")
     kapt ("com.google.dagger:hilt-android-compiler:$hilt_version")
 
-    //okhttp
-    val okhttp_version = "4.9.0"
-    implementation ("com.squareup.okhttp3:okhttp:$okhttp_version")
-    implementation ("com.squareup.okhttp3:logging-interceptor:$okhttp_version")
-    implementation ("com.squareup.okhttp3:okhttp-urlconnection:$okhttp_version")
-
-    //Retrofit2
-    val retrofit_version = "2.9.0"
-    implementation ("com.squareup.retrofit2:retrofit:$retrofit_version")
-    implementation ("com.squareup.retrofit2:converter-gson:$retrofit_version")
-
-    //Glide
-    val glide_version = "4.11.0"
-    implementation ("com.github.bumptech.glide:glide:$glide_version")
-    implementation ("com.github.bumptech.glide:compiler:$glide_version")
 
     //Room
     val room_version = "2.5.0"
@@ -122,7 +127,13 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.0.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
 
+    implementation("com.google.android.gms:play-services-ads:22.6.0")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+}
+fun getPropertyKey(propertyKey: String): String {
+    val nullableProperty: String? = gradleLocalProperties(rootDir).getProperty(propertyKey)
+    return nullableProperty ?: "null"
 }

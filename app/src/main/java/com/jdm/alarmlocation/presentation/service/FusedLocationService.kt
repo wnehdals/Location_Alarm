@@ -214,6 +214,7 @@ class FusedLocationService : Service() {
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setOngoing(setOnGoing)
+            .setAutoCancel(false)
 
         return builder.build()
     }

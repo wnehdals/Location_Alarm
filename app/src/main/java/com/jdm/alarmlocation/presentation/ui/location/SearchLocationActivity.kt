@@ -14,6 +14,7 @@ import com.jdm.alarmlocation.base.BaseActivity
 import com.jdm.alarmlocation.databinding.ActivitySearchLocationBinding
 import com.jdm.alarmlocation.domain.model.NameLocation
 import com.jdm.alarmlocation.presentation.dialog.PermissionDialog
+import com.jdm.alarmlocation.presentation.ui.util.hasPermissions
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,12 +24,24 @@ class SearchLocationActivity : BaseActivity<ActivitySearchLocationBinding>() {
         get() = R.layout.activity_search_location
     private val permissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { _ ->
-            checkPermissions()
+            if (hasPermissions(permissions)) {
+                permissionSuccessProcess()
+            } else {
+                showPermissionDialog {
+                    goToSystemSetting()
+                }
+            }
         }
 
     private val systemSettingLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            checkPermissions()
+            if (hasPermissions(permissions)) {
+                permissionSuccessProcess()
+            } else {
+                showPermissionDialog {
+                    goToSystemSetting()
+                }
+            }
         }
     private val permissions = arrayOf(
         android.Manifest.permission.ACCESS_FINE_LOCATION,
@@ -64,12 +77,38 @@ class SearchLocationActivity : BaseActivity<ActivitySearchLocationBinding>() {
             }
         }
     }
+    private fun permissionSuccessProcess() {
+        binding.llSearchLocationDefault.visibility = View.GONE
+        viewModel.getLocationInfo(this@SearchLocationActivity)
+    }
+    private fun showPermissionDialog(rightClick: () -> Unit) {
+        PermissionDialog(
+            context = this@SearchLocationActivity,
+            msg = getString(R.string.str_app_permission_storage_popup_desc),
+            icon = R.drawable.ic_pin_black,
+            permissionName = getString(R.string.str_location),
+            rightClick = {
+                rightClick()
+            }
+        ).show(supportFragmentManager, PermissionDialog.TAG)
+    }
+
 
     override fun initEvent() {
         with(binding) {
+            appbarSearchLocation.lyAppbarBack.setOnClickListener {
+                finish()
+            }
             btSearchLocationCurrent.setOnClickListener {
-                requestPermission()
-                binding.llSearchLocationDefault.visibility = View.GONE
+                if (isPermissionAllow(permissions)) {
+                    permissionSuccessProcess()
+                } else {
+                    showPermissionDialog{
+                        requestPermission()
+                    }
+                }
+
+
 
             }
         }

@@ -30,4 +30,10 @@ class MainViewModel @Inject constructor(
             getAlarmList()
         }
     }
+    fun deleteAlarm(alarm: Alarm) {
+        viewModelScope.launch {
+            alarmRepository.deleteAlarm(alarm)
+            getAlarmList()
+        }
+    }
 }

@@ -56,6 +56,12 @@
     <string name="str_time">시간</string>
     <string name="str_way_0">진입하면</string>
     <string name="str_way_1">벗어나면</string>
+    <string name="str_warning">경고</string>
+    <string name="str_warning_duplicate_desc1">위치 알람은 1개만 활성화 할 수 있습니다.\n실행중인 위치 알람을 비활성화 해주세요</string>
+    <string name="ad_attribution" translatable="false">Ad</string>
+    <string name="str_review_desc">위치알람 앱에 대한 리뷰를 남겨주시면\n개선하겠습니다.</string>
+    <string name="str_exit_app_question">앱을 종료하시겠습니까?</string>
+    <string name="str_exit">종료</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

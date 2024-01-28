@@ -134,10 +134,13 @@
                     android:text="@string/str_alarm_location_guide6"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="8dp"/>
-                <androidx.appcompat.widget.AppCompatTextView
+                <FrameLayout
+                    android:id="@+id/ad_frame"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:layout_weight="1"/>
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/bt_alarm_add"
                     style="@style/FButton"

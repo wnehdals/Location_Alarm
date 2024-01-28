@@ -15,7 +15,7 @@ interface AlarmDao {
     suspend fun insert(alarmEntity: AlarmEntity): Long
 
     @Delete
-    suspend fun delete(alarmEntity: AlarmEntity)
+    suspend fun delete(alarmEntity: AlarmEntity): Int
 
 
     @Query("SELECT * FROM ALARM")

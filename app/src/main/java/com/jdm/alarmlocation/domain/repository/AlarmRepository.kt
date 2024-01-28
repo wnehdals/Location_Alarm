@@ -16,5 +16,5 @@ interface AlarmRepository {
                 isOn: Boolean): Long
     suspend fun getAllAlarm(): List<Alarm>
     suspend fun updateAlarm(alarm: Alarm): Int
-
+    suspend fun deleteAlarm(alarm: Alarm): Int
 }
