@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.ui.splash.SplashActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/bg_gradient_green400">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_clock_logo"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Label.L"
+            android:textColor="@color/white"
+            android:layout_marginTop="8dp"
+            android:text="@string/app_name"/>
+    </LinearLayout>
+
+</layout>

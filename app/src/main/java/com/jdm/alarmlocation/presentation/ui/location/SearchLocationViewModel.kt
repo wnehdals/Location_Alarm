@@ -1,5 +1,6 @@
 package com.jdm.alarmlocation.presentation.ui.location
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Geocoder
 import android.util.Log
@@ -35,7 +36,6 @@ class SearchLocationViewModel @Inject constructor(
     val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             super.onLocationResult(locationResult)
-            Log.e("location", "receive : ${locationReceiveCnt}")
             if (locationReceiveCnt >= 1) {
                 releaseLocation()
                 getAddress()
@@ -47,7 +47,6 @@ class SearchLocationViewModel @Inject constructor(
                     val longitude = loc.longitude
                     location = Location(latitude, longitude)
 
-                    Log.e("location", "latitude : ${latitude} / longitude : ${longitude}")
                 }
             }
         }
@@ -76,7 +75,7 @@ class SearchLocationViewModel @Inject constructor(
                 searchResultMsgData.value = "현재 위치를 찾을 수 없습니다."
                 return
             }
-            val address = geocoder.first().getAddressLine(0)
+            val address = geocoder[0].getAddressLine(0)
 
 
                 insertLocation(

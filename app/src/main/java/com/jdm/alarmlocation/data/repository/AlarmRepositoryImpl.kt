@@ -3,13 +3,18 @@ package com.jdm.alarmlocation.data.repository
 import com.jdm.alarmlocation.data.dao.AlarmDao
 import com.jdm.alarmlocation.domain.repository.AlarmRepository
 import com.jdm.alarmlocation.data.entity.AlarmEntity
+import com.jdm.alarmlocation.data.entity.toAlarm
+import com.jdm.alarmlocation.data.entity.toAlarmEntity
+import com.jdm.alarmlocation.data.entity.toNameLocation
+import com.jdm.alarmlocation.domain.model.Alarm
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class AlarmRepositoryImpl @Inject constructor(
     private val alarmDao: AlarmDao
 ) : AlarmRepository {
-    override fun insert(
+    override suspend fun insert(
         leftTimeHour: Int,
         leftTImeMinute: Int,
         rightTimeHour: Int,
@@ -18,7 +23,8 @@ class AlarmRepositoryImpl @Inject constructor(
         latitude: Double,
         longitude: Double,
         range: Int,
-        way: Int
+        way: Int,
+        isOn: Boolean
     ): Long {
         return alarmDao.insert(
             AlarmEntity(
@@ -30,8 +36,24 @@ class AlarmRepositoryImpl @Inject constructor(
                 latitude = latitude,
                 longitude = longitude,
                 range = range,
-                way = way
+                way = way,
+                isOn = isOn
             )
         )
+    }
+
+    override suspend fun getAllAlarm(): List<Alarm> {
+        /*
+        return alarmDao.selectAll().map { entities ->
+            entities.map { it.toAlarm() }
+        }
+
+         */
+        return  alarmDao.selectAll().map { entities -> entities.toAlarm() }
+    }
+
+    override suspend fun updateAlarm(alarm: Alarm): Int {
+        val id = alarmDao.update(alarm.toAlarmEntity())
+        return id
     }
 }

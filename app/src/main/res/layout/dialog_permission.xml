@@ -16,12 +16,19 @@
             android:gravity="center"
             android:layout_marginHorizontal="20dp"
             android:paddingVertical="16dp"
-            android:text="@string/str_noti" />
+            android:text="@string/str_permission_dialog_title" />
         <View
             android:id="@+id/common_dialog_even_divide"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@color/gray_100"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Label.S"
+            android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/str_permission_guide"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_pin_black"/>
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_permission_name"
                 style="@style/Label.L"
                 android:layout_marginStart="8dp"
                 android:text="@string/str_location"/>

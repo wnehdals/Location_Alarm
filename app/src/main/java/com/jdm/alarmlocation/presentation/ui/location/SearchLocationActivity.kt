@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.jdm.alarmlocation.R
@@ -36,6 +37,7 @@ class SearchLocationActivity : BaseActivity<ActivitySearchLocationBinding>() {
     private val searchLocationAdapter: SearchLocationAdapter by lazy {
         SearchLocationAdapter(this, ::onClickRecentlyLocation)
     }
+
     override fun initView() {
         with(binding) {
             rvSearchLocationRecently.adapter = searchLocationAdapter
@@ -83,6 +85,10 @@ class SearchLocationActivity : BaseActivity<ActivitySearchLocationBinding>() {
     private fun checkPermissions() {
         if (!isPermissionAllow(permissions)) {
             PermissionDialog(
+                context = this,
+                msg = getString(R.string.str_app_permission_storage_popup_desc),
+                icon = R.drawable.ic_pin_black,
+                permissionName = getString(R.string.str_location),
                 rightClick = {
                     if (permissions.all { shouldShowRequestPermissionRationale(it) }) {
                         requestPermission()

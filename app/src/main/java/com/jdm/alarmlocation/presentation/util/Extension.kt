@@ -3,6 +3,7 @@ package com.jdm.alarmlocation.presentation.ui.util
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.util.TypedValue
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -60,3 +61,5 @@ fun Activity.slideUp() {
 fun Activity.slideDown() {
     overridePendingTransition(R.anim.slide_down_enter, R.anim.slide_down_exit)
 }
+val Int.toPx get() = (this * Resources.getSystem().displayMetrics.density).toInt()
+

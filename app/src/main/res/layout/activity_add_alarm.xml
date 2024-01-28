@@ -90,6 +90,62 @@
                         android:layout_marginStart="4dp"/>
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Label.L"
+                        android:text="@string/str_alarm_location_guide4"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_range"
+                        style="@style/Paragraph.S"
+                        android:layout_width="60dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center"
+                        android:text="@string/str_range"
+                        android:textColor="@color/gray_400"
+                        android:background="@drawable/bg_r8_s_gray200_f_white"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Label.L"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/str_alarm_location_guide5"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_way"
+                        style="@style/Paragraph.S"
+                        android:layout_width="100dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center"
+                        android:text="@string/str_way"
+                        android:textColor="@color/gray_400"
+                        android:background="@drawable/bg_r8_s_gray200_f_white"/>
+
+                </LinearLayout>
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Label.L"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/str_alarm_location_guide6"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="8dp"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/bt_alarm_add"
+                    style="@style/FButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:text="@string/str_add"/>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

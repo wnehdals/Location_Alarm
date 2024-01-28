@@ -1,8 +1,12 @@
 package com.jdm.alarmlocation.presentation.dialog
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.jdm.alarmlocation.R
@@ -12,6 +16,10 @@ import com.jdm.alarmlocation.databinding.DialogCommonEvenBinding
 import com.jdm.alarmlocation.databinding.DialogPermissionBinding
 
 class PermissionDialog(
+    private val context: Context,
+    @DrawableRes private val icon: Int,
+    private val msg: String,
+    private val permissionName: String,
     private val rightClick: () -> Unit,
     private val isCancel: Boolean = true
 ) : BaseBottomSheetDialogFragment<DialogPermissionBinding>() {
@@ -26,6 +34,9 @@ class PermissionDialog(
     }
     override fun initView(view: View) {
         isCancelable = isCancel
+        binding.ivLocation.setImageDrawable(ContextCompat.getDrawable(context, icon))
+        binding.commonDialogEvenMsg.text = msg
+        binding.tvPermissionName.text = permissionName
     }
 
     override fun initEvent() {

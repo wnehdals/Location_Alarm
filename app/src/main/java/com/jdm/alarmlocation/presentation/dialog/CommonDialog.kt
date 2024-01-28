@@ -1,11 +1,11 @@
-package com.jdm.alarmlocation.presentation.ui.dialog
+package com.jdm.alarmlocation.presentation.dialog
 
 import android.view.View
 import com.jdm.alarmlocation.R
 import com.jdm.alarmlocation.base.BaseDialogFragment
 import com.jdm.alarmlocation.databinding.DialogCommonEvenBinding
 
-class CommonDIalog(
+class CommonDialog(
     private val title: String,
     private val msg: String,
     private val leftText: String? = null,

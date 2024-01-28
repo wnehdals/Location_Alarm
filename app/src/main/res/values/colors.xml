@@ -4,7 +4,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="c_173f75">#173f75</color>
 
+    <!--<color name="colorAccent">#04B8AB</color> -->
     <color name="c_ffffffff">#00000000</color>
+    <color name="c_cccccc">#CCCCCC</color>
     <color name="white">#FFFFFF</color>
     <color name="gray_50">#F6F6F6</color>
     <color name="gray_100">#EEEEEE</color>
@@ -27,32 +29,8 @@
     <color name="red_600">#870F00</color>
     <color name="red_700">#5A0A00</color>
 
-    <color name="orange_50">#FFF3EF</color>
-    <color name="orange_100">#FFE1D6</color>
-    <color name="orange_200">#FABDA5</color>
-    <color name="orange_300">#FA9269</color>
-    <color name="orange_400">#FF6937</color>
-    <color name="orange_500">#C14F29</color>
-    <color name="orange_600">#9A3F21</color>
-    <color name="orange_700">#672A16</color>
 
-    <color name="yellow_50">#FFFAF0</color>
-    <color name="yellow_100">#FFF2D9</color>
-    <color name="yellow_200">#FFE3AC</color>
-    <color name="yellow_300">#FFCF70</color>
-    <color name="yellow_400">#FFC043</color>
-    <color name="yellow_500">#BC8B2C</color>
-    <color name="yellow_600">#996F00</color>
-    <color name="yellow_700">#674D1B</color>
-
-    <color name="green_50">#E6F2ED</color>
-    <color name="green_100">#CEEBDF</color>
-    <color name="green_200">#66D19E</color>
-    <color name="green_300">#06C167</color>
-    <color name="green_400">#048848</color>
-    <color name="green_500">#03703C</color>
-    <color name="green_600">#03582F</color>
-    <color name="green_700">#10462D</color>
+    <color name="green_200">#04B8AB</color>
 
     <color name="blue_50">#EFF3FE</color>
     <color name="blue_100">#D4E2FC</color>
@@ -72,19 +50,6 @@
     <color name="purple_600">#453473</color>
     <color name="purple_700">#2E224C</color>
 
-    <color name="magenta_50">#F9F1F7</color>
-    <color name="magenta_100">#F2DDEB</color>
-    <color name="magenta_200">#E2B4D3</color>
-    <color name="magenta_300">#CE7EB3</color>
-    <color name="magenta_400">#BF569C</color>
-    <color name="magenta_500">#914176</color>
-    <color name="magenta_600">#72335D</color>
-    <color name="magenta_700">#4C223E</color>
-
-    <color name="accent">#276EF1</color>
-    <color name="negative">#E11900</color>
-    <color name="warning">#FFC043</color>
-    <color name="positive">#048848</color>
 
     <color name="transparent">#00ffffff</color>
 
@@ -97,9 +62,6 @@
     <color name="c_ffeeee">#FFEEEE</color>
     <color name="c_fff1d6">#FFF1D6</color>
 
-    <color name="status_positive">#38D563</color>
-    <color name="status_caution">#FFB747</color>
-    <color name="status_negative">#FF554A</color>
 
     <!-- transparent black color -->
     <color name="black_t_05">#0D000000</color>

@@ -8,7 +8,7 @@ import com.jdm.alarmlocation.data.entity.AlarmEntity
 import com.jdm.alarmlocation.data.entity.LocationEntity
 
 @Database(
-    entities = [LocationEntity::class, AlarmEntity::class], version = 1
+    entities = [LocationEntity::class, AlarmEntity::class], version = 2
 )
 abstract class AppDatabase: RoomDatabase() {
     abstract fun locationDao(): LocationDao

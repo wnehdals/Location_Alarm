@@ -8,8 +8,11 @@ import com.jdm.alarmlocation.R
 import com.jdm.alarmlocation.base.BaseActivity
 import com.jdm.alarmlocation.databinding.ActivityAddAlarmBinding
 import com.jdm.alarmlocation.domain.model.NameLocation
+import com.jdm.alarmlocation.domain.model.Range
+import com.jdm.alarmlocation.domain.model.Way
 import com.jdm.alarmlocation.presentation.dialog.CommonTimePickerDialog
-import com.jdm.alarmlocation.presentation.dialog.PermissionDialog
+import com.jdm.alarmlocation.presentation.dialog.ListDialog
+import com.jdm.alarmlocation.presentation.dialog.CommonDialog
 import com.jdm.alarmlocation.presentation.ui.location.SearchLocationActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
@@ -28,7 +31,20 @@ class CreateAlarmActivity : BaseActivity<ActivityAddAlarmBinding>() {
                 }
             }
         }
+    private val rangeList = listOf<Range>(
+        Range(300, "300", false),
+        Range(600, "600", false),
+        Range(900, "900", false),
+        Range(1200, "1200", false),
+        Range(1500, "1500", false),
+    )
+    private val wayList = listOf<Way>(
+        Way(0, "진입하면", false),
+        Way(1, "벗어나면", false)
+    )
+
     override fun initView() {
+
     }
 
     override fun subscribe() {
@@ -59,10 +75,47 @@ class CreateAlarmActivity : BaseActivity<ActivityAddAlarmBinding>() {
                 binding.tvAddress.setTextColor(ContextCompat.getColor(this, R.color.gray_400))
             }
         }
+        viewModel.range.observe(this) {
+            if (it != null) {
+                binding.tvRange.text = it.text
+                binding.tvRange.setTextColor(ContextCompat.getColor(this, R.color.blue_400))
+            } else {
+                binding.tvRange.text = getString(R.string.str_range)
+                binding.tvRange.setTextColor(ContextCompat.getColor(this, R.color.gray_400))
+            }
+        }
+        viewModel.way.observe(this) {
+            if (it != null) {
+                binding.tvWay.text = it.text
+                binding.tvWay.setTextColor(ContextCompat.getColor(this, R.color.blue_400))
+            } else {
+                binding.tvWay.text = getString(R.string.str_range)
+                binding.tvWay.setTextColor(ContextCompat.getColor(this, R.color.gray_400))
+            }
+        }
+        viewModel.dialogMsg.observe(this) {
+            if (it != null) {
+                CommonDialog(
+                    title = getString(R.string.str_noti),
+                    msg = it,
+                    rightText = getString(R.string.str_confirm),
+                    rightClick = {
+
+                    }
+                ).show(supportFragmentManager, CommonDialog.TAG)
+            }
+
+        }
+        viewModel.insertResult.observe(this) {
+            finish()
+        }
     }
 
     override fun initEvent() {
         with(binding) {
+            appbarCreateAlarm.lyAppbarBack.setOnClickListener {
+                finish()
+            }
             tvLeftTime.setOnClickListener {
                 CommonTimePickerDialog(
                     title = getString(R.string.str_time_picker_title),
@@ -91,6 +144,32 @@ class CreateAlarmActivity : BaseActivity<ActivityAddAlarmBinding>() {
                 val intent = Intent(this@CreateAlarmActivity, SearchLocationActivity::class.java)
                 locationSearchActivityLauncher.launch(intent)
             }
+            tvRange.setOnClickListener {
+                ListDialog(
+                    this@CreateAlarmActivity,
+                    rangeList
+                ) {
+                    rangeList.forEach { range ->
+                        if (range.id == it.id) range.isSelected = true
+                    }
+                    viewModel.range.value = it as Range
+                }.show(supportFragmentManager, ListDialog.TAG)
+            }
+            tvWay.setOnClickListener {
+                ListDialog(
+                    this@CreateAlarmActivity,
+                    wayList
+                ) {
+                    wayList.forEach { way ->
+                        if (way.id == it.id) way.isSelected = true
+                    }
+                    viewModel.way.value = it as Way
+                }.show(supportFragmentManager, ListDialog.TAG)
+            }
+            btAlarmAdd.setOnClickListener {
+                viewModel.createAlarm()
+            }
+
         }
     }
 

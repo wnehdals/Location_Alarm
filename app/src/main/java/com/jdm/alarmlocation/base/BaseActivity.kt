@@ -3,6 +3,7 @@ package com.jdm.alarmlocation.base
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -61,7 +62,10 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         return checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
     }
     protected fun isPermissionAllow(permission: Array<String>): Boolean {
-        return permission.filter { ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_DENIED }.isEmpty()
+        return permission.filter {
+
+            var result = ContextCompat.checkSelfPermission(this, it)
+            result == PackageManager.PERMISSION_DENIED }.isEmpty()
     }
     protected fun exitApp() {
         this.moveTaskToBack(true)
