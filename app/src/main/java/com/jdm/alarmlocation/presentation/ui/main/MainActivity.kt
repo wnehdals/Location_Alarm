@@ -319,7 +319,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private fun showPermissionDialog(rightClick: () -> Unit) {
         PermissionDialog(
             context = this,
-            icon = R.drawable.ic_noti_black,
+            icon = R.drawable.ic_pin_black,
             msg = getString(R.string.background_permission_desc),
             permissionName = getString(R.string.str_location),
             isCancel = false,

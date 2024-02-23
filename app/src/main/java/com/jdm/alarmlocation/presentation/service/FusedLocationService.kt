@@ -172,7 +172,6 @@ class FusedLocationService : Service() {
             alarm = intent.getParcelableExtra("alarm")?: null
             if (alarm == null) {
                 stopLocationUpdates()
-                return START_NOT_STICKY
             }
             if (action != null) {
                 if (action == ACTION_START_LOCATION_SERVICE) {
@@ -182,9 +181,9 @@ class FusedLocationService : Service() {
                 }
             }
         } else {
-            return Service.START_REDELIVER_INTENT //서비스가 비정상 종료되었다고 판단하고 재시작
         }
-        return super.onStartCommand(intent, flags, startId)
+        //return super.onStartCommand(intent, flags, startId)
+        return Service.START_REDELIVER_INTENT //서비스가 비정상 종료되었다고 판단하고 재시작
     }
     override fun onBind(intent: Intent): IBinder {
         TODO("Return the communication channel to the service.")
@@ -239,7 +238,7 @@ class FusedLocationService : Service() {
             return
         }
         fusedLocationClient.requestLocationUpdates(createLocationRequest(), locationCallback, Looper.getMainLooper())
-        startForeground(LOCATION_SERVICE_ID, getNotification(title = title, body = body, channelId = channelId, pushNotiId = 0, intent = intent, setOnGoing = true))
+        startForeground(LOCATION_SERVICE_ID, getNotification(title = title, body = body, channelId = channelId, pushNotiId = 0, intent = intent, setOnGoing = true), )
     }
     fun hasPermission(): Boolean {
         return permissions.filter { this.checkSelfPermission(it) == PackageManager.PERMISSION_DENIED }.isEmpty()
