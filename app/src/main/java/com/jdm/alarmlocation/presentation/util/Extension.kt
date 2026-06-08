@@ -9,6 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.jdm.alarmlocation.R
+import java.nio.charset.StandardCharsets
 
 //*************************************************************************************************************************************************
 // Context, Activity, Fragment
@@ -63,3 +64,7 @@ fun Activity.slideDown() {
 }
 val Int.toPx get() = (this * Resources.getSystem().displayMetrics.density).toInt()
 
+fun String.toUTF8String(): String {
+    val bytes = this.toByteArray(StandardCharsets.UTF_8)
+    return bytes.decodeToString()
+}

@@ -5,7 +5,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_r8_f_white"
+        android:background="@drawable/bg_r24_f_white"
         android:orientation="vertical"
         android:paddingBottom="16dp">
         <androidx.appcompat.widget.AppCompatTextView

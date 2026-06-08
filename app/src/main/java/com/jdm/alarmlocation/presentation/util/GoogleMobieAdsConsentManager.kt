@@ -1,5 +1,5 @@
 package com.jdm.alarmlocation.presentation.util
-
+/*
 import android.app.Activity
 import android.content.Context
 import android.provider.Settings
@@ -9,7 +9,6 @@ import com.google.android.ump.ConsentInformation
 import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.FormError
 import com.google.android.ump.UserMessagingPlatform
-import okio.HashingSource.md5
 
 class GoogleMobileAdsConsentManager private constructor(context: Context) {
     private val consentInformation: ConsentInformation =
@@ -85,3 +84,5 @@ class GoogleMobileAdsConsentManager private constructor(context: Context) {
                 }
     }
 }
+
+ */

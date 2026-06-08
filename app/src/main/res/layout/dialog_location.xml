@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_r24_f_white"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/common_dialog_even_title"
+            style="@style/Label.L"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="center"
+            android:paddingVertical="16dp"
+            android:text="@string/str_location_permission_title" />
+
+        <View
+            android:id="@+id/common_dialog_even_divide"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/gray_100" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Label.S"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/str_location_permission_msg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/Label.S"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_location_permission_msg_2" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/Label.S"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="@string/str_location_permission_msg_3"
+                android:textColor="@color/blue_400" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/Label.S"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/str_location_permission_msg_7" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Label.S"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/str_location_permission_msg_4" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Label.S"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="설정 방법 : 권한 > 위치 > 항상 허용" />
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Label.S"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/str_location_permission_msg_5"
+            android:textColor="@color/gray_400" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Label.S"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/str_location_permission_msg_6"
+            android:textColor="@color/gray_400" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_location"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_pin_stroke" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_permission_name"
+                style="@style/Label.L"
+                android:layout_marginStart="8dp"
+                android:text="@string/str_location" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/tv_dialog_common_even_top"
+                style="@style/SecondaryButton"
+                android:text="@string/str_go_setting" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/tv_dialog_common_even_bottom"
+                style="@style/PrimaryButton"
+                android:layout_marginTop="16dp"
+                android:text="@string/str_later" />
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

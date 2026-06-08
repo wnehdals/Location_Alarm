@@ -1,67 +1,89 @@
 package com.jdm.alarmlocation.presentation.ui.location
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.location.Geocoder
+import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationResult
 import com.jdm.alarmlocation.base.BaseViewModel
-import com.jdm.alarmlocation.domain.model.Location
-import com.jdm.alarmlocation.domain.model.NameLocation
-import com.jdm.alarmlocation.domain.repository.LocationRepository
-import com.jdm.alarmlocation.presentation.service.LocationManager
+import com.jdm.alarmlocation.domain.model.Place
+import com.jdm.alarmlocation.domain.repository.SearchRepository
 import com.jdm.alarmlocation.presentation.util.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
-import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchLocationViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val locationRepository: LocationRepository
+    private val searchRepository: SearchRepository
 ) : BaseViewModel() {
-    private var lm: LocationManager? = null
-    private var location: Location? = null
-    private var locationReceiveCnt = 0
 
-    var selectedNameLocation: NameLocation? = null
-    val searchResultMsgData = SingleLiveEvent<String>()
-    val direction = SingleLiveEvent<String>()
-    val locationList = SingleLiveEvent<List<NameLocation>>()
+    val currentPlace = SingleLiveEvent<Place>()
+    val placeData = SingleLiveEvent<List<Place>>()
+    val rangeData = SingleLiveEvent<Int>()
+    val isInData = SingleLiveEvent<Boolean>()
+    val _mapReadyFlow = MutableStateFlow(false)
+    val mapReadyFlow: SharedFlow<Boolean> get() = _mapReadyFlow.asSharedFlow()
+    val _alarmFlow = MutableStateFlow<Place?>(null)
+    val alarmFlow: SharedFlow<Place?> get() = _alarmFlow.asSharedFlow()
 
-    val locationCallback = object : LocationCallback() {
-        override fun onLocationResult(locationResult: LocationResult) {
-            super.onLocationResult(locationResult)
-            if (locationReceiveCnt >= 1) {
-                releaseLocation()
-                getAddress()
+
+
+    init {
+        mapReadyFlow.zip(alarmFlow) { mapReady, alarm ->
+            alarm
+        }.onEach { alarm ->
+            alarm?.let {
+                currentPlace.value = it
+                Log.e("SearchLocationViewModel alarm : ", it.toString())
             }
-            locationReceiveCnt++
-            for (loc in locationResult.locations) {
-                if (loc != null) {
-                    val latitude = loc.latitude
-                    val longitude = loc.longitude
-                    location = Location(latitude, longitude)
+        }.catch {
 
-                }
-            }
+        }.launchIn(viewModelScope)
+
+    }
+
+    fun emitAlarm(place: Place?) {
+        if (place == null) return
+
+        viewModelScope.launch {
+            _alarmFlow.tryEmit(place)
         }
     }
 
-    fun getLocationInfo(context: Context) {
-        releaseLocation()
-        lm = LocationManager(context, locationCallback)
-        locationReceiveCnt = 0
-        lm?.startLocationUpdates()
+    fun emitMapReadyFlow() {
+        _mapReadyFlow.tryEmit(true)
     }
 
-    fun releaseLocation() {
-        lm?.stopLocationUpdates()
+    fun searchKeyword(keyword: String) {
+        searchRepository.getSearchPlace(
+            query = keyword,
+            onError = {
+                toastMsg.value = it
+            })
+            .onEach {
+                placeData.value = it
+            }.catch {
+
+            }.launchIn(viewModelScope)
     }
+
+    companion object {
+        fun getIntent(context: Context): Intent {
+            val intent = Intent(context, SearchLocationActivity::class.java)
+            return intent
+        }
+    }
+
+    /*
 
     fun getAddress() {
         try {
@@ -96,22 +118,6 @@ class SearchLocationViewModel @Inject constructor(
         }
     }
 
-    fun insertLocation(name: String, latitude: Double, longitude: Double) {
-        viewModelScope.launch {
-            locationRepository.insertLocation(
-                name = name,
-                latitude = latitude,
-                longitude = longitude
-            )
-        }
-    }
-
-    fun getLocationList() {
-        viewModelScope.launch {
-            locationRepository.getAllLocation().collect() {
-                locationList.value = it
-            }
-        }
-    }
+     */
 
 }

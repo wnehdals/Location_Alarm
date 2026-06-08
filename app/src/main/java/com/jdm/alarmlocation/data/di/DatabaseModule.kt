@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.jdm.alarmlocation.data.AppDatabase
 import com.jdm.alarmlocation.data.dao.AlarmDao
 import com.jdm.alarmlocation.data.dao.LocationDao
+import com.jdm.alarmlocation.data.dao.RoutineDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,5 +33,10 @@ object DatabaseModule {
     @Singleton
     fun provideAlarmDao(appDatabase: AppDatabase): AlarmDao {
         return appDatabase.alarmDao()
+    }
+    @Provides
+    @Singleton
+    fun provideRoutineDao(appDatabase: AppDatabase): RoutineDao {
+        return appDatabase.routineDao()
     }
 }

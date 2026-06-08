@@ -1,7 +1,6 @@
 package com.jdm.alarmlocation.data.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -12,15 +11,21 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface AlarmDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(alarmEntity: AlarmEntity): Long
+    suspend fun insert(alarmEntity: AlarmEntity)
 
-    @Delete
-    suspend fun delete(alarmEntity: AlarmEntity): Int
+    @Query("DELETE FROM ALARM WHERE id = :id")
+    suspend fun delete(id: Long)
 
 
     @Query("SELECT * FROM ALARM")
     suspend fun selectAll(): List<AlarmEntity>
 
+    @Query("SELECT * FROM ALARM WHERE routineId = :routineId")
+    suspend fun selectAllByRoutineId(routineId: Long): List<AlarmEntity>
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun update(alarmEntity: AlarmEntity): Int
+    suspend fun update(alarmEntity: AlarmEntity)
+
+    @Query("SELECT * FROM ALARM WHERE id = :id")
+    fun selectById(id: Long): Flow<AlarmEntity>
 }

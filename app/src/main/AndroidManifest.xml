@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -9,14 +10,15 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+
     <meta-data
         android:name="com.google.firebase.messaging.default_notification_icon"
-        android:resource="@drawable/ic_logo_noti"
-        />
+        android:resource="@drawable/ic_logo_noti" />
     <meta-data
         android:name="com.google.firebase.messaging.default_notification_color"
         android:resource="@color/green_200" />
+
     <application
         android:name=".AlarmApp"
         android:allowBackup="false"
@@ -29,34 +31,51 @@
         android:theme="@style/Theme.Alarmlocation"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9955048675507406~8522175580"/>
-        <activity
-            android:name=".presentation.ui.main.MainActivity"
-            android:hardwareAccelerated="true"
-            android:screenOrientation="portrait"
+        <receiver
+            android:name=".presentation.service.MidnightReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="ACTION_DAILY_MIDNIGHT_UPDATE" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".presentation.service.GeofenceBroadcastReceiver"
+            android:enabled="true"
             android:exported="true" />
         <activity
-            android:name=".presentation.ui.location.SearchLocationActivity"
-            android:screenOrientation="portrait"
+            android:name=".presentation.ui.time.TimeActivity"
             android:exported="false" />
+        <activity
+            android:name=".presentation.ui.routine.CreateRoutineActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9955048675507406~8522175580" />
+
+        <activity
+            android:name=".presentation.ui.main.MainActivity"
+            android:exported="true"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.ui.location.SearchLocationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".presentation.service.FusedLocationService"
             android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="location"/>
+            android:foregroundServiceType="location" />
 
-        <activity
-            android:name=".presentation.ui.create.CreateAlarmActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
         <activity
             android:name=".presentation.ui.splash.SplashActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Alarmlocation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

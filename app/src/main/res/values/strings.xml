@@ -62,7 +62,27 @@
     <string name="str_review_desc">위치알람 앱에 대한 리뷰를 남겨주시면\n개선하겠습니다.</string>
     <string name="str_exit_app_question">앱을 종료하시겠습니까?</string>
     <string name="str_exit">종료</string>
-
+    <string name="str_app_permission_popup_setting_desc">설정에서 위치권한을 허용해주세요</string>
+    <string name="str_save">저장</string>
+    <string name="str_remove">삭제</string>
+    <string name="str_create_routine">루틴 만들기</string>
+    <string name="str_alarm_permission_title">알람 권한 안내</string>
+    <string name="str_alarm_permission_msg">알람 및 리마인더 권한을 허용하지 않으면 알람이 제대로 동작하지 않을 수 있어요.</string>
+    <string name="str_alarm">알람 및 리마인더</string>
+    <string name="str_go_setting">설정하기</string>
+    <string name="str_later">나중에</string>
+    <string name="str_notification">알림</string>
+    <string name="str_notification_permission_msg">알림 권한을 허용하지 않으면 알림을 받을 수 없어요.</string>
+    <string name="str_foreground_basic_channel_name">알림 허용</string>
+    <string name="str_foreground_alarm_channel_name">알람 및 리마인더</string>
+    <string name="str_location_permission_title">위치 권한 안내</string>
+    <string name="str_location_permission_msg">위치 기반으로 알림을 보내드려요</string>
+    <string name="str_location_permission_msg_2">알림을 받아보시려면, 위치 권한을</string>
+    <string name="str_location_permission_msg_3">"항상 허용"</string>
+    <string name="str_location_permission_msg_4">설정해 주세요.</string>
+    <string name="str_location_permission_msg_5">- 앱을 종료하거나 미사용 중에도 위치 데이터를 이용하여 알림을 보낼 수 있어요</string>
+    <string name="str_location_permission_msg_6">- 위치 데이터는 저장되지 않아요.</string>
+    <string name="str_location_permission_msg_7">으로</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,26 +1,30 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import java.util.Properties
 
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
-    id("com.google.dagger.hilt.android")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.hilt)
     id("kotlin-parcelize")
-    id("org.jetbrains.kotlin.plugin.serialization")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.google.service)
 }
-
 android {
     namespace = "com.jdm.alarmlocation"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.jdm.alarmlocation"
-        minSdk = 30
-        targetSdk = 34
-        versionCode = 2
-        versionName = "1.0.1"
+        minSdk = 31
+        targetSdk = 36
+        versionCode = 3
+        versionName = "1.0.2"
+        buildConfigField("String", "NAVER_CLIEND_ID", getPropertyKey("cliendid"))
+        buildConfigField("String", "SEARCH_CLIENT_ID", getPropertyKey("searchCliendId"))
+        buildConfigField("String", "SEARCH_SECRET_ID", getPropertyKey("searchCliendSecret"))
+        buildConfigField("String", "NCP_API_ID", getPropertyKey("ncpapikey"))
+        buildConfigField("String", "NCP_API_SECRET_ID", getPropertyKey("cliendSecret"))
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -77,63 +81,70 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui)
+    implementation(libs.jwtdecode)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation ("com.google.android.material:material:1.9.0")
-    implementation( "androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation ("androidx.fragment:fragment-ktx:1.5.6")
-    val lifecycle_version = "2.6.1"
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
+    // hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    ksp(libs.androidx.hilt.compiler)
+    implementation(kotlin("reflect"))
 
-    //hilt
-    val hilt_version = "2.44"
-    implementation ("com.google.dagger:hilt-android:$hilt_version")
-    kapt ("com.google.dagger:hilt-android-compiler:$hilt_version")
+    // okhttp
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
+    implementation(libs.okhttp.connection)
 
+    // retrofit + sandwich
+    implementation(libs.sandwich.retrofit)
+    implementation(libs.sandwich)
+    implementation(libs.retrofit.kotlin.serialization)
+    implementation(libs.kotlinx.serialization.json)
+
+    implementation(libs.kotlinx.immutable)
+
+    // ui
+    implementation(libs.lottie)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.swiperefreshlayout)
+
+    // coroutine
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics.ktx)
+    implementation(libs.firebase.messaging)
+    implementation(libs.firebase.perf.ktx)
+    implementation(libs.firebase.config.ktx)
 
     //Room
-    val room_version = "2.5.0"
+    val room_version = "2.5.1"
     implementation ("androidx.room:room-runtime:$room_version")
-    kapt ("androidx.room:room-compiler:$room_version")
+    ksp ("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
 
 
-
-    // Coroutines
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
-
-
-
-    implementation ("androidx.recyclerview:recyclerview:1.2.1")
-
-
-    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-
-
-
-    val lottieVersion = "6.0.1"
-    implementation ("com.airbnb.android:lottie:$lottieVersion")
-
-    implementation(platform("com.google.firebase:firebase-bom:32.1.1"))
-    implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.google.firebase:firebase-crashlytics-ktx")
-    implementation("com.google.firebase:firebase-messaging")
-    implementation("com.google.firebase:firebase-perf-ktx")
-    implementation("com.google.firebase:firebase-config-ktx")
     implementation("com.google.android.gms:play-services-location:21.0.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
 
-    implementation("com.google.android.gms:play-services-ads:22.6.0")
+    //implementation("com.google.android.gms:play-services-ads:22.6.0")
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    implementation("com.naver.maps:map-sdk:3.22.1")
+    implementation("com.google.code.gson:gson:2.10.1")
 }
 fun getPropertyKey(propertyKey: String): String {
-    val nullableProperty: String? = gradleLocalProperties(rootDir).getProperty(propertyKey)
+    val nullableProperty: String? = gradleLocalProperties(rootDir, providers).getProperty(propertyKey)
     return nullableProperty ?: "null"
 }

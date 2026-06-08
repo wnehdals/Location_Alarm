@@ -1,5 +1,5 @@
 package com.jdm.alarmlocation.presentation.dialog
-
+/*
 import android.os.Build
 import android.util.Log
 import android.view.View
@@ -244,3 +244,6 @@ class AdmobDialog(
         val ADMOB_AD_UNIT_ID = "ca-app-pub-9955048675507406/2393232572"
     }
 }
+
+
+ */

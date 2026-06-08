@@ -1,9 +1,9 @@
-package com.jdm.data.di
+package com.jdm.alarmlocation.data.di
 
 import com.jdm.alarmlocation.domain.repository.AlarmRepository
 import com.jdm.alarmlocation.data.repository.AlarmRepositoryImpl
-import com.jdm.alarmlocation.domain.repository.LocationRepository
-import com.jdm.alarmlocation.data.repository.LocationRepositoryImpl
+import com.jdm.alarmlocation.data.repository.SearchRepositoryImpl
+import com.jdm.alarmlocation.domain.repository.SearchRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -17,9 +17,10 @@ abstract class RepositoryModule {
 
     @Singleton
     @Binds
-    abstract fun bindLocationRepository(locationRepository: LocationRepositoryImpl): LocationRepository
+    abstract fun bindAlarmRepository(alarmRepository: AlarmRepositoryImpl): AlarmRepository
+
     @Singleton
     @Binds
-    abstract fun bindAlarmRepository(alarmRepository: AlarmRepositoryImpl): AlarmRepository
+    abstract fun bindSearchRepository(searchRepository: SearchRepositoryImpl): SearchRepository
 
 }
