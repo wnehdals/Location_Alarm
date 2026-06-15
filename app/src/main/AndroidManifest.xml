@@ -44,6 +44,10 @@
             android:name=".presentation.service.GeofenceBroadcastReceiver"
             android:enabled="true"
             android:exported="true" />
+        <receiver
+            android:name=".presentation.service.routine.RoutineGeofenceReceiver"
+            android:enabled="true"
+            android:exported="false" />
         <activity
             android:name=".presentation.ui.time.TimeActivity"
             android:exported="false" />
@@ -73,6 +77,25 @@
 
         <activity
             android:name=".presentation.ui.splash.SplashActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Alarmlocation" />
+
+        <!-- 알람 발생 풀스크린 (06) — 잠금화면 위 표시 -->
+        <activity
+            android:name=".presentation.ui.compose.alarm.AlarmFullScreenActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:showWhenLocked="true"
+            android:theme="@style/Theme.Alarmlocation"
+            android:turnScreenOn="true" />
+
+        <!-- 재설계된 Compose 앱 진입점 (스플래시 → 로그인 → 온보딩 → 목록 → 생성) -->
+        <activity
+            android:name=".presentation.ui.compose.ComposeMainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"

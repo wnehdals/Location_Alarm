@@ -21,6 +21,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MidnightReceiver : BroadcastReceiver() {
     @Inject lateinit var repository: AlarmRepository
+    @Inject lateinit var routineGeofenceManager: com.jdm.alarmlocation.presentation.service.routine.RoutineGeofenceManager
     private val coroutineScope = CoroutineScope(Job())
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == "ACTION_DAILY_MIDNIGHT_UPDATE" || intent.action == Intent.ACTION_BOOT_COMPLETED) {
@@ -40,6 +41,8 @@ class MidnightReceiver : BroadcastReceiver() {
                         removeGeofenceBySchedule(it, context)
                     }
                 }
+                // 신규 LocationRoutine 지오펜스도 오늘 요일 기준으로 재동기화.
+                routineGeofenceManager.syncNow()
                 scheduleMidnightUpdate(context)
             }
         }
